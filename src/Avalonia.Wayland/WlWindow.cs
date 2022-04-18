@@ -12,6 +12,7 @@ using NWayland.Interop;
 using NWayland.Protocols.Wayland;
 using NWayland.Protocols.XdgDecorationUnstableV1;
 using NWayland.Protocols.XdgShell;
+using NWayland.Protocols.Viewporter;
 
 namespace Avalonia.Wayland
 {
@@ -24,6 +25,7 @@ namespace Avalonia.Wayland
         private readonly XdgToplevel _xdgToplevel;
         private readonly ZxdgToplevelDecorationV1 _toplevelDecoration;
         private readonly WlInputDevice _wlInputDevice;
+        private readonly WpViewport _wpViewport;
 
         private bool _active;
 
@@ -40,6 +42,7 @@ namespace Avalonia.Wayland
             _xdgToplevel = _xdgSurface.GetToplevel();
             _xdgToplevel.Events = this;
             _toplevelDecoration = platform.ZxdgDecorationManager.GetToplevelDecoration(_xdgToplevel);
+            _wpViewport = platform.WpViewporter.GetViewport(_wlSurface);
 
             if (popupParent is not null)
                 SetParent(popupParent);
@@ -49,6 +52,8 @@ namespace Avalonia.Wayland
             ClientSize = screens.Count > 0
                 ? new Size(screens[0].WorkingArea.Width * 0.75, screens[0].WorkingArea.Height * 0.7)
                 : new Size(400, 600);
+
+            _wpViewport.SetSource(0, 0, (int) ClientSize.Width, (int) ClientSize.Height);
 
             _surfaces = new List<object>
             {

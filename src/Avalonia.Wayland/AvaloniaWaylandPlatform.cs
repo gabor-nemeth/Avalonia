@@ -14,6 +14,7 @@ using NWayland.Protocols.Wayland;
 using NWayland.Protocols.XdgDecorationUnstableV1;
 using NWayland.Protocols.XdgOutputUnstableV1;
 using NWayland.Protocols.XdgShell;
+using NWayland.Protocols.Viewporter;
 
 namespace Avalonia.Wayland
 {
@@ -32,6 +33,8 @@ namespace Avalonia.Wayland
         public WlShm WlShm { get; private set; }
 
         public XdgWmBase XdgWmBase { get; private set; }
+
+        public WpViewporter WpViewporter { get; private set; }
 
         // public XdgActivationV1 XdgActivation { get; private set; }
 
@@ -52,6 +55,7 @@ namespace Avalonia.Wayland
             WlSeat = WlRegistryHandler.Bind(WlSeat.BindFactory, WlSeat.InterfaceName, WlSeat.InterfaceVersion);
             WlShm = WlRegistryHandler.Bind(WlShm.BindFactory, WlShm.InterfaceName, WlShm.InterfaceVersion);
             XdgWmBase = WlRegistryHandler.Bind(XdgWmBase.BindFactory, XdgWmBase.InterfaceName, XdgWmBase.InterfaceVersion);
+            WpViewporter = WlRegistryHandler.Bind(WpViewporter.BindFactory, WpViewporter.InterfaceName, WpViewporter.InterfaceVersion);
             // XdgActivation = WlRegistryHandler.Bind(XdgActivationV1.BindFactory, XdgActivationV1.InterfaceName, XdgActivationV1.InterfaceVersion);
             ZxdgDecorationManager = WlRegistryHandler.Bind(ZxdgDecorationManagerV1.BindFactory, ZxdgDecorationManagerV1.InterfaceName, ZxdgDecorationManagerV1.InterfaceVersion);
             ZxdgOutputManager = WlRegistryHandler.Bind(ZxdgOutputManagerV1.BindFactory, ZxdgOutputManagerV1.InterfaceName, ZxdgOutputManagerV1.InterfaceVersion);
