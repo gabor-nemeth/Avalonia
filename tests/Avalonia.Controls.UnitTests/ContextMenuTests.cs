@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Threading.Tasks;
+using Avalonia.Collections;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -371,7 +372,37 @@ namespace Avalonia.Controls.UnitTests
                 popupImpl.Verify(x => x.Show(true, false), Times.Exactly(2));
             }
         }
-        
+
+        [Fact]
+        public async Task ContextMenu_Shouldnt_Freeze_On_Open_When_First_Item_Is_Not_Focusable()
+        {
+            using (Application())
+            {
+                var contextMenu = new ContextMenu() 
+                { 
+                    Items = new AvaloniaList<MenuItem>() 
+                    { 
+                        new MenuItem { Header = "Menu Item", Focusable = false },
+                        new MenuItem { Header = "Menu Item 2" }
+                    } 
+                };
+                var target = new Panel
+                {
+                    ContextMenu = contextMenu
+                };
+                var window = PreparedWindow(target);
+                window.ApplyTemplate();
+                window.Presenter.ApplyTemplate();
+
+                // In some cases calling Open method on the ContextMenu with the first item being not focusable
+                // may lead to an infinite loop so here in case in 2s Open method fails to complete 
+                // we consider this test as failed.
+                var task = Task.Run(contextMenu.Open);
+                await Task.Delay(2000);
+                Assert.True(task.IsCompletedSuccessfully);
+            }
+        }
+
         [Fact]
         public void Context_Menu_Can_Be_Shared_Between_Controls_Even_After_A_Control_Is_Removed_From_Visual_Tree()
         {
