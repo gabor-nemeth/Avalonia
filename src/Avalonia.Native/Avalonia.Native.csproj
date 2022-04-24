@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(PackAvaloniaNative)' == 'true'">
-    <Content Include="../../Build/Products/Release/libAvalonia.Native.OSX.dylib">
+    <Content Include="../../Build/Products/Release/libAvaloniaNative.dylib">
       <Link>libAvaloniaNative.dylib</Link>
       <PackagePath>runtimes/osx/native/libAvaloniaNative.dylib</PackagePath>
       <Pack>true</Pack>

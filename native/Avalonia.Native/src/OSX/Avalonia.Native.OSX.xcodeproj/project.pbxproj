@@ -64,7 +64,7 @@
 		AB661C1D2148230F00291242 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		AB661C1F2148286E00291242 /* window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = window.mm; sourceTree = "<group>"; };
 		AB661C212148288600291242 /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		AB7A61EF2147C815003C5833 /* libAvalonia.Native.OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libAvalonia.Native.OSX.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB7A61EF2147C815003C5833 /* libAvaloniaNative.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libAvaloniaNative.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8F7D6A21482D7F0057DBA5 /* platformthreading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = platformthreading.mm; sourceTree = "<group>"; };
 		BC11A5BC2608D58F0017BAD0 /* automation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = automation.h; sourceTree = "<group>"; };
 		BC11A5BD2608D58F0017BAD0 /* automation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = automation.mm; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		AB7A61F02147C815003C5833 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB7A61EF2147C815003C5833 /* libAvalonia.Native.OSX.dylib */,
+				AB7A61EF2147C815003C5833 /* libAvaloniaNative.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,7 +170,7 @@
 			);
 			name = Avalonia.Native.OSX;
 			productName = Avalonia.Native.OSX;
-			productReference = AB7A61EF2147C815003C5833 /* libAvalonia.Native.OSX.dylib */;
+			productReference = AB7A61EF2147C815003C5833 /* libAvaloniaNative.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -347,7 +347,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				HEADER_SEARCH_PATHS = ../../inc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AvaloniaNative;
 			};
 			name = Debug;
 		};
@@ -358,7 +358,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				HEADER_SEARCH_PATHS = ../../inc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AvaloniaNative;
 			};
 			name = Release;
 		};
