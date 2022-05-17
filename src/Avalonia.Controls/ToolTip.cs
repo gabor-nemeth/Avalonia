@@ -1,5 +1,8 @@
 #nullable enable
 using System;
+using System.Diagnostics;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using Avalonia.Controls.Diagnostics;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -69,8 +72,11 @@ namespace Avalonia.Controls
         static ToolTip()
         {
             TipProperty.Changed.Subscribe(ToolTipService.Instance.TipChanged);
-            IsOpenProperty.Changed.Subscribe(ToolTipService.Instance.TipOpenChanged);
-            IsOpenProperty.Changed.Subscribe(IsOpenChanged);
+            IsOpenProperty.Changed
+                .Subscribe(ToolTipService.Instance.TipOpenChanged);
+            IsOpenProperty.Changed
+                .ObserveOn(Scheduler.CurrentThread)
+                .Subscribe(IsOpenChanged);
 
             HorizontalOffsetProperty.Changed.Subscribe(RecalculatePositionOnPropertyChanged);
             VerticalOffsetProperty.Changed.Subscribe(RecalculatePositionOnPropertyChanged);
@@ -217,6 +223,11 @@ namespace Avalonia.Controls
 
             if (newValue)
             {
+                if (control is TextBlock tb)
+                {
+                    Debug.WriteLine($"Tooltip is opened for {tb.Text} with delay {ToolTip.GetShowDelay(control)}.");
+                }
+
                 var tip = GetTip(control);
                 if (tip == null) return;
 
@@ -234,7 +245,16 @@ namespace Avalonia.Controls
             else
             {
                 toolTip = control.GetValue(ToolTipProperty);
+                if (toolTip == null)
+                {
+                    Debug.WriteLine($"No tooltip found to be closed for control: {control}");
+                }
+
                 toolTip?.Close();
+                if (control is TextBlock tb)
+                {
+                    Debug.WriteLine($"Tooltip is closed for {tb.Text}.");
+                }
             }
 
             toolTip?.UpdatePseudoClasses(newValue);

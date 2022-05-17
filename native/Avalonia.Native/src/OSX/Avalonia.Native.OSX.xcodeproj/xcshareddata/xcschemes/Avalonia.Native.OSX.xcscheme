@@ -43,7 +43,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         FilePath = "/usr/local/share/dotnet/dotnet">
+         FilePath = "/usr/local/share/dotnet/x64/dotnet">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
@@ -56,7 +56,7 @@
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "bin/Debug/netcoreapp3.1/ControlCatalog.NetCore.dll"
+            argument = "/Users/gabor/SynergySports/Avalonia/samples/ControlCatalog.NetCore/bin/Debug/net6.0/ControlCatalog.NetCore.dll"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

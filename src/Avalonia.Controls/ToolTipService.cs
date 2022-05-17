@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Avalonia.Input;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
@@ -57,7 +58,7 @@ namespace Avalonia.Controls
 
             if (e.OldValue is false && e.NewValue is true)
             {
-                control.DetachedFromVisualTree += ControlDetaching;
+                control.De tachedFromVisualTree += ControlDetaching;
                 control.EffectiveViewportChanged += ControlEffectiveViewportChanged;
             }
             else if(e.OldValue is true && e.NewValue is false)
@@ -82,6 +83,11 @@ namespace Avalonia.Controls
         /// <param name="e">The event args.</param>
         private void ControlPointerEnter(object sender, PointerEventArgs e)
         {
+            if (sender is TextBlock tb)
+            {
+                Debug.WriteLine($"Tooltip is opening for {tb.Text}.");
+            }
+
             StopTimer();
 
             var control = (Control)sender;
@@ -103,6 +109,11 @@ namespace Avalonia.Controls
         /// <param name="e">The event args.</param>
         private void ControlPointerLeave(object sender, PointerEventArgs e)
         {
+            if (sender is TextBlock tb)
+            {
+                Debug.WriteLine($"Tooltip is closing for {tb.Text}.");
+            }
+            
             var control = (Control)sender;
             Close(control);
         }
