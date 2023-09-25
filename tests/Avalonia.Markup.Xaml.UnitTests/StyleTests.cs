@@ -1,8 +1,7 @@
 using System.Linq;
-using System.Reactive.Linq;
 using Avalonia.Controls;
 using Avalonia.Data;
-using Avalonia.PropertyStore;
+using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.UnitTests;
 using Xunit;
@@ -21,6 +20,19 @@ namespace Avalonia.Markup.Xaml.UnitTests
                 var setter = (Setter)(style.Setters.First());
 
                 Assert.IsType<Binding>(setter.Value);
+            }
+        }
+
+        [Fact]
+        public void Selector_MenuItem_IsSelected()
+        {
+            using (UnitTestApplication.Start(TestServices.MockPlatformWrapper))
+            {
+                var xaml = "<Style Selector='MenuItem[(SelectingItemsControl.IsSelected)=True]' xmlns='https://github.com/avaloniaui'><Setter Property='Background' Value='Green'/></Style>";
+                var style = (Style)AvaloniaRuntimeXamlLoader.Load(xaml);
+                var setter = (Setter)(style.Setters.First());
+
+                Assert.IsAssignableFrom<IBrush>(setter.Value);
             }
         }
 

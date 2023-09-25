@@ -106,7 +106,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Defines the IsSelected attached property.
         /// </summary>
-        public static readonly StyledProperty<bool> IsSelectedProperty =
+        public static readonly AttachedProperty<bool> IsSelectedProperty =
             AvaloniaProperty.RegisterAttached<SelectingItemsControl, Control, bool>(
                 "IsSelected",
                 defaultBindingMode: BindingMode.TwoWay);
